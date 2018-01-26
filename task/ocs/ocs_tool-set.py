@@ -7,6 +7,7 @@
 # noinspection PyPackageRequirements
 import requests
 
+
 def call_ocs_api(api, api_url, print_output=True):
     """" Call (read operation) an OCS api """
 
