@@ -128,8 +128,6 @@ tenant = "/api/Tenants/4be9ded8-c6a6-44ac-8e1a-9db44e58fa49"
 
 name_space = "test_19"
 
-
-
 # ### Read - operations #########################################################################################:
 # fogbench_luxometer
 # fogbench_accelerometer
