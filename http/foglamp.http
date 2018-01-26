@@ -1,0 +1,15 @@
+
+PUT http://192.168.1.100:8081/foglamp/schedule/5d7fed92-fb9a-11e7-8c3f-9a214cf093ae
+Accept: application/json
+{ "enabled" : true }
+
+###
+
+http://192.168.1.100:8081/foglamp/category/SEND_PR_4
+
+###
+
+http://192.168.1.100:8081/foglamp/category/SEND_PR_1
+
+###
+
