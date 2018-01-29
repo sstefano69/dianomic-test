@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2018 ihs
 
-"""" OCS tool-set V 1.6 """
+"""" OCS tool-set V 1.7 """
 
 # noinspection PyPackageRequirements
 import requests
