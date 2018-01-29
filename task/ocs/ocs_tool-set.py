@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2018 ihs
 
-"""" OCS tool-set V 1.5 """
+"""" OCS tool-set V 1.6 """
 
 # noinspection PyPackageRequirements
 import requests
@@ -63,7 +63,9 @@ def delete_object_type(namespace, _type):
 
 
 def delete_streams_types(namespace):
-    """" Deletes all the streams and types in the provided namespace """
+    """" Deletes all the streams and types in the provided namespace
+        WARNING: it deletes all the information in the Namespace
+    """
 
     # Delete Streams
     delete_object_type(namespace, "Streams")
