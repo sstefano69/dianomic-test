@@ -2,11 +2,10 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2018 ihs
 
-"""" OCS tool-set """
+"""" OCS tool-set V 1.5 """
 
 # noinspection PyPackageRequirements
 import requests
-
 
 
 def call_ocs_api(api, api_url, print_output=True):
@@ -133,7 +132,7 @@ name_space = "test_19"
 # fogbench_luxometer
 # fogbench_accelerometer
 
-# get_values_stream(name_space, "fogbench_accelerometer", "2018-01-16T10:57:20.670404Z", 10)
+# get_values_stream(name_space, "fogbench_accelerometer", "2018-01-19T09:25:20.670404Z", 10)
 
 # ### Delete - operations #########################################################################################:
 
@@ -142,10 +141,8 @@ name_space = "test_19"
 
 # ### Read - List Streams / Types ####################################################################################:
 
-
-
-values = call_ocs_api("Types", "/Namespaces/{0}/types".format(name_space))
-print_values(values)
+# values = call_ocs_api("Types", "/Namespaces/{0}/types".format(name_space))
+# print_values(values)
 
 # values = call_ocs_api("Streams", "/Namespaces/{0}/types".format(name_space), print_output=False)
 # print_values(values)
@@ -154,7 +151,8 @@ print_values(values)
 
 # call_ocs_api("Publishers", "/Publishers")
 
-# call_ocs_api("GetLastValue", "/Namespaces/test/Streams/measurement_fogbench_luxometer/Data/GetLastValue")
+call_ocs_api("GetLastValue",
+             "/Namespaces/{}/Streams/measurement_fogbench_luxometer/Data/GetLastValue".format(name_space))
 
 # values = call_ocs_api("GetWindowValues",
 #                       "/Namespaces/test/Streams/measurement_fogbench_luxometer/Data/GetWindowValues?"
