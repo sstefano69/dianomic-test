@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-/bin/
-echo test
-echo t2
+
+echo t1.sh executed
 
 
