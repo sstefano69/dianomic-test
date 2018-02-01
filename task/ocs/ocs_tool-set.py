@@ -7,7 +7,6 @@
 # noinspection PyPackageRequirements
 import requests
 
-
 def call_ocs_api(api, api_url, print_output=True):
     """" Call (read operation) an OCS api """
 
@@ -146,15 +145,15 @@ name_space = "test_19"
 # values = call_ocs_api("Types", "/Namespaces/{0}/types".format(name_space))
 # print_values(values)
 
-# values = call_ocs_api("Streams", "/Namespaces/{0}/types".format(name_space), print_output=False)
-# print_values(values)
+values = call_ocs_api("Streams", "/Namespaces/{0}/Streams".format(name_space), print_output=False)
+print_values(values)
 
 # ### Other operations #########################################################################################:
 
 # call_ocs_api("Publishers", "/Publishers")
 
-call_ocs_api("GetLastValue",
-             "/Namespaces/{}/Streams/measurement_fogbench_luxometer/Data/GetLastValue".format(name_space))
+# call_ocs_api("GetLastValue",
+#             "/Namespaces/{}/Streams/measurement_fogbench_luxometer/Data/GetLastValue".format(name_space))
 
 # values = call_ocs_api("GetWindowValues",
 #                       "/Namespaces/test/Streams/measurement_fogbench_luxometer/Data/GetWindowValues?"
