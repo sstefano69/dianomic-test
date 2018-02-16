@@ -4,27 +4,86 @@
 
 import os
 
-script_path = "/home/foglamp/wrk/bash"
+# ### Cfg #########################################################################################:
 
-# ###  Setup / Cleanup ##############################################################################################:
+script_path = "/home/foglamp/Development/FogLAMP/tests/system/suites"
 
-cmd = "chmod 755 {}/*.sh".format(script_path)
-os.system(cmd)
+script_bash = "/home/foglamp/Development/FogLAMP/tests/system/tests/bash"
+
+# test_suite = "end_to_end_OCS"
+test_suite = "end_to_end_PI"
+
+# ## Clean up #########################################################################################:
 
 # cmd = "rm -rf /usr/local/scaledb/tmp/scaledb-test-performance.log"
 # os.system(cmd)
 
-# ### Prepare ######################################################################################################:
+
+# ## Setup#########################################################################################:
+
+path = script_path + '/{0}/t'.format(test_suite)
+cmd = "chmod 755 {}/*.test".format(path)
+os.system(cmd)
+
+path = script_path + '/foglamp-test'
+cmd = "chmod 755 {}".format(path)
+os.system(cmd)
+
+path = script_bash + '/*.bash'
+cmd = "chmod 755 {}".format(path)
+os.system(cmd)
+
+
+# ## Fixes #########################################################################################:
 
 cmd = "cd {};".format(script_path)
 
-# ###  Test ######################################################################################################:
+# Fix
+cmd += "pkill storage;"
+cmd += "sudo sh -c '> /var/log/syslog';"
 
-cmd += "bash -x ./t1.sh"
+# Increments OMF_TYPE_ID
+cmd += """
+bash -c '
+file=/home/foglamp/Development/FogLAMP/tests/system/suites/end_to_end_PI/suite.cfg;
+
+omf_type_id=`cat ${file} | grep -E '.*OMF_TYPE_ID.*=.*' | grep -o '[0-9]*'`;
+new_omf_type_id=$((omf_type_id+1));
+
+sed -i -e s/${omf_type_id}/${new_omf_type_id}/ ${file};
+';
+"""
+
+os.system(cmd)
+
+# ## Prepare #########################################################################################:
+
+cmd = "cd {};".format(script_path)
+
+# cmd += "bash ./foglamp-test {0} --list".format(test_suite)
+cmd += "bash ./foglamp-test {0}".format(test_suite)
 
 # ### Exec  ######################################################################################################:
 
 os.system(cmd)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
