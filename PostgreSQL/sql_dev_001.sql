@@ -1,4 +1,21 @@
 
+### DELETE  #########################################################################################:
+
+SELECT id,asset_code,reading,user_ts FROM foglamp.readings;
+SELECT * FROM foglamp.omf_created_objects;
+
+DELETE FROM foglamp.readings;
+DELETE FROM foglamp.omf_created_objects;
+
+select * from foglamp.log;
+
+###  ########################################################################################:
+SELECT * FROM  foglamp.streams;
+
+SELECT * FROM foglamp.destinations;
+
+###  #########################################################################################:
+
 SELECT id, asset_code, read_key, reading, user_ts AT TIME ZONE 'UTC' as user_ts, ts AT TIME ZONE 'UTC' as ts FROM foglamp.readings WHERE id >= 1 ORDER BY id LIMIT 2;
 
 

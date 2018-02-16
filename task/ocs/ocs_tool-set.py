@@ -11,6 +11,8 @@ def call_ocs_api(api, api_url, print_output=True):
     """" Call (read operation) an OCS api """
 
     response = requests.get('https://qi-data.osisoft.com' + tenant + api_url, headers=headers)
+    output = response.json()
+    print("output  {}".format(output))
 
     if print_output:
         print('--- {} -----------------------------------------'.format(api))
@@ -138,15 +140,15 @@ name_space = "test_19"
 # ### Delete - operations #########################################################################################:
 
 # WARNING: it deletes all the information in the Namespace
-# delete_streams_types(name_space)
+delete_streams_types(name_space)
 
 # ### Read - List Streams / Types ####################################################################################:
 
 # values = call_ocs_api("Types", "/Namespaces/{0}/types".format(name_space))
 # print_values(values)
 
-values = call_ocs_api("Streams", "/Namespaces/{0}/Streams".format(name_space), print_output=False)
-print_values(values)
+# values = call_ocs_api("Streams", "/Namespaces/{0}/Streams".format(name_space), print_output=False)
+# print_values(values)
 
 # ### Other operations #########################################################################################:
 

@@ -2,28 +2,13 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2017 ihs
 
+import sys
 
-b = {'API': False}
+t1 = str(sys.argv[1:])
+t2 = str(sys.argv[1])
 
-v = b'The FogLAMP Core REST API'
+print("DBG t1 |{0}|".format(type(t1)))
+print("DBG t2 |{0}|".format(type(t2)))
 
-v2 = v.decode("utf-8")
-
-
-def get_utc_time(dt):
-    import dateutil.parser  # move to imports section
-    from datetime import datetime  # move to imports section
-    your_date = dateutil.parser.parse(dt)
-    print("before ", your_date)
-
-    ts = your_date.timestamp()
-    your_utc_dt = datetime.utcfromtimestamp(ts).strftime('%Y-%m-%dT%H:%M:%S.%fZ')
-    return your_utc_dt
-
-
-if __name__ == "__main__":
-    print("India", get_utc_time("2018-01-22 18:58:00.603994+05:30"))
-
-    print("Milan", get_utc_time("2018-03-26 18:58:00.603994+01:00"))
-
-
+print("DBG t1 |{0}|".format(t1))
+print("DBG t2 |{0}|".format(t2))
