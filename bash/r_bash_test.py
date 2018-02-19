@@ -18,8 +18,9 @@ os.system(cmd)
 
 cmd = "cd {};".format(script_path)
 
-cmd += "bash ./t1.sh"
-# cmd += "bash ./omf_delete.sh"
+# cmd += "bash ./t1.sh"
+cmd += "bash /home/foglamp/wrk/task/FOGL-999/pi_delete.sh"
+
 
 # ## Run #########################################################################################:
 
