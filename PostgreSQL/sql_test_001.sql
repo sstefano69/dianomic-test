@@ -1,3 +1,24 @@
+### Check  #########################################################################################:
+
+SELECT * FROM foglamp.log;
+
+SELECT * FROM foglamp.scheduled_processes;
+
+SELECT * FROM foglamp.schedules;
+
+SELECT * FROM foglamp.omf_created_objects;
+
+SELECT id,asset_code,reading,user_ts,ts  FROM foglamp.readings oRDER BY id;
+
+
+
+SELECT * FROM foglamp.configuration ORDER BY key;
+
+SELECT * FROM foglamp.configuration WHERE key = 'SEND_PR_1';
+
+SELECT * FROM foglamp.configuration WHERE key LIKE 'OMF%';
+
+
 ### RAspbain #########################################################################################:
 
 -- psql -U pi -d foglamp -c "select * from foglamp.configuration where key='rest_api';"
@@ -38,10 +59,16 @@ NULL, '00:00:15', true, true);
 ###  #########################################################################################:
 ### OMF - Readings #########################################################################################:
 
+# DELETE
+DELETE FROM foglamp.readings;
+
+DELETE FROM  foglamp.omf_created_objects;
+
+
+#
+# SELECT
+#
 SELECT * FROM foglamp.omf_created_objects;
-
-
-# DELETE FROM foglamp.readings;
 
 SELECT id,asset_code,reading,user_ts,ts  FROM foglamp.readings oRDER BY id;
 
@@ -62,6 +89,11 @@ SELECT id,asset_code,reading,user_ts FROM foglamp.readings WHERE asset_code  lik
 SELECT * FROM foglamp.streams;
 
 SELECT * FROM foglamp.destinations;
+
+# UPDATE foglamp.streams SET last_object=0 WHERE id=1;
+# UPDATE foglamp.streams SET last_object=0 WHERE id=4;
+
+
 
 ###  scheduled_processes#########################################################################################:
 
@@ -112,9 +144,19 @@ INSERT INTO foglamp.scheduled_processes ( name, script ) VALUES ( 'statistics to
 
 ### configuration #########################################################################################:
 
+# Clean cfg ##########################################
+DELETE FROM foglamp.omf_created_objects;
+DELETE FROM foglamp.configuration WHERE key = 'SEND_PR_1 ';
+
+-- HTTP north configuration, north key-value pair should not be added and pick dynamically (TODO- FOGL-732)
+INSERT INTO foglamp.configuration ( key, description, value )
+     VALUES ( 'SEND_PR_1', 'OMF North Plugin Configuration', ' { "plugin" : { "type" : "string", "value" : "omf", "default" : "omf", "description" : "Python module name of the plugin to load" } } ');
+######################################################
+
+
 SELECT * FROM foglamp.configuration ORDER BY Key;
 
-SELECT * FROM foglamp.configuration WHERE key = 'BACK_REST';
+SELECT * FROM foglamp.configuration WHERE key = 'SEND_PR_1';
 
 
 ### statistics #########################################################################################:
