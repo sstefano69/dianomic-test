@@ -92,10 +92,10 @@ function_process_list() {
 
 function_get_pid_file() {
 
-    printf">>> PID file -----------------------------------------------------------------"
+    printf "\n >>> PID file ----------------------------------------------------------------- \n"
     ls -l ${FOGLAMP_ROOT}/data/var/run
     cat ${FOGLAMP_ROOT}/data/var/run/foglamp.core.pid
-    printf "\n >>> PID file -----------------------------------------------------------------"
+    printf "\n >>> PID file ----------------------------------------------------------------- \n"
 }
 
 test_step_base() {
