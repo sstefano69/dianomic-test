@@ -1,11 +1,62 @@
 #!/bin/bash
 
-file=/home/foglamp/Development/FogLAMP/tests/system/suites/end_to_end_PI/suite.cfg
+export FOGLAMP_ROOT=/home/foglamp/Development/FogLAMP
 
-omf_type_id=`cat ${file} | grep -E '.*OMF_TYPE_ID.*=.*' | grep -o '[0-9]*'`
-new_omf_type_id=$((omf_type_id+1))
 
-echo omf_type_id :${omf_type_id}:
-echo new_omf_type_id :${new_omf_type_id}:
+###  #########################################################################################:
 
-sed -i -e s/${omf_type_id}/${new_omf_type_id}/ ${file}
+test1 () {
+    ${FOGLAMP_ROOT}/scripts/foglamp status
+    ${FOGLAMP_ROOT}/scripts/foglamp stop
+    ${FOGLAMP_ROOT}/scripts/foglamp status
+}
+
+test2 () {
+    ${FOGLAMP_ROOT}/scripts/foglamp start
+}
+
+
+test_ssl() {
+
+    ${FOGLAMP_ROOT}/scripts/foglamp stop
+    ${FOGLAMP_ROOT}/scripts/foglamp kill
+    ${FOGLAMP_ROOT}/scripts/foglamp start
+
+    echo ">>> SET ssl -----------------------------------------------------------------"
+
+    curl -s -X GET http://localhost:8081/foglamp/category/rest_api/enableHttp | jq
+    curl -s -X PUT -H "Content-Type: application/json" -d '{"value": "false" }' http://localhost:8081/foglamp/category/rest_api/enableHttp
+    curl -s -X GET http://localhost:8081/foglamp/category/rest_api/enableHttp | jq
+
+    ${FOGLAMP_ROOT}/scripts/foglamp status
+    ${FOGLAMP_ROOT}/scripts/foglamp stop
+
+    echo ">>> FogLAMP restarted -----------------------------------------------------------------"
+    ${FOGLAMP_ROOT}/scripts/foglamp start
+}
+
+test_ssl
+
+###  #########################################################################################:
+
+exit 0
+
+export REST_API_URL=https://127.0.0.1:1995;\
+curl -s ${REST_API_URL}/foglamp/ping || true
+
+
+ls -l ${FOGLAMP_ROOT}/data/var/run
+
+cat ${FOGLAMP_ROOT}/data/var/run/foglamp.core.pid
+
+rm ${FOGLAMP_ROOT}/data/var/run/foglamp.core.pid
+
+clear screen;\
+ps -elf | grep  -E "storage" | grep -v "grep";\
+ps -elf | grep -E "foglamp.services" | grep -v "grep";\
+ps -elf | grep -E "foglamp.tasks" | grep -v "grep"
+
+ps -elf | grep  -E "python3" | grep -v "grep"
+
+
+

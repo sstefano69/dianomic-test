@@ -11,8 +11,8 @@ script_path = "/home/foglamp/Development/FogLAMP/tests/system/suites"
 script_bash = "/home/foglamp/Development/FogLAMP/tests/system/tests/bash"
 
 # test_suite = "end_to_end_OCS"
-test_suite = "end_to_end_PI"
-
+# test_suite = "end_to_end_PI"
+test_suite = "SOW"
 # ## Clean up #########################################################################################:
 
 # cmd = "rm -rf /usr/local/scaledb/tmp/scaledb-test-performance.log"
@@ -39,20 +39,20 @@ os.system(cmd)
 cmd = "cd {};".format(script_path)
 
 # Fix
-cmd += "pkill storage;"
+#cmd += "pkill storage;"
 cmd += "sudo sh -c '> /var/log/syslog';"
 
 # Increments OMF_TYPE_ID
-cmd += """
-bash -c '
-file=/home/foglamp/Development/FogLAMP/tests/system/suites/end_to_end_PI/suite.cfg;
-
-omf_type_id=`cat ${file} | grep -E '.*OMF_TYPE_ID.*=.*' | grep -o '[0-9]*'`;
-new_omf_type_id=$((omf_type_id+1));
-
-sed -i -e s/${omf_type_id}/${new_omf_type_id}/ ${file};
-';
-"""
+# cmd += """
+# bash -c '
+# file=/home/foglamp/Development/FogLAMP/tests/system/suites/end_to_end_PI/suite.cfg;
+#
+# omf_type_id=`cat ${file} | grep -E '.*OMF_TYPE_ID.*=.*' | grep -o '[0-9]*'`;
+# new_omf_type_id=$((omf_type_id+1));
+#
+# sed -i -e s/${omf_type_id}/${new_omf_type_id}/ ${file};
+# ';
+# """
 
 os.system(cmd)
 
@@ -61,6 +61,8 @@ os.system(cmd)
 cmd = "cd {};".format(script_path)
 
 # cmd += "bash ./foglamp-test {0} --list".format(test_suite)
+# cmd += "bash ./foglamp-test {0}".format(test_suite)
+
 cmd += "bash ./foglamp-test {0}".format(test_suite)
 
 # ### Exec  ######################################################################################################:
