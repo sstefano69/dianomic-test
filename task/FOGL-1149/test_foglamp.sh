@@ -2,7 +2,10 @@
 
 #!/bin/bash
 
-export TEST_ENV=develop
+# Selects the environment
+# export TEST_ENV=develop
+export TEST_ENV=deploy
+#export TEST_ENV=snap
 
 
 if [[ "${TEST_ENV}" == "develop" ]]; then
@@ -32,24 +35,64 @@ printf "\n >>> FOGLAMP_CMD  :${FOGLAMP_CMD}:  "
 ###  #########################################################################################:
 
 command_status () {
+
     ${FOGLAMP_CMD} status
+    exit_code=$?
+
+    if [[ $exit_code != 0 ]]; then
+
+        echo ">>> ERROR: executing command_status :${exit_code}: "
+        exit 1
+    fi
 }
 
 
 command_stop () {
+
     ${FOGLAMP_CMD} stop
+    exit_code=$?
+
+    if [[ ${exit_code} != 0 ]]; then
+
+        echo ">>> INFO: executing command_stop :${exit_code}: "
+    fi
 }
 
 command_kill () {
+
     ${FOGLAMP_CMD} kill
+    exit_code=$?
+
+    if [[ $exit_code != 0 ]]; then
+
+        echo ">>> ERROR: executing command_kill :${exit_code}: "
+        exit 1
+    fi
 }
 
 command_reset () {
+
     echo -e "YES" | ${FOGLAMP_CMD} reset
+    exit_code=$?
+
+    if [[ $exit_code != 0 ]]; then
+
+        echo ">>> ERROR: executing command_reset :${exit_code}: "
+        exit 1
+    fi
+    
+    printf "\n"
 }
 
 command_start () {
+
     ${FOGLAMP_CMD} start
+    exit_code=$?
+
+    if [[ $exit_code != 0 ]]; then
+
+        echo ">>> INFO: executing command_start :${exit_code}: "
+    fi
 }
 
 
@@ -100,7 +143,7 @@ function_get_pid_file() {
 
 test_step_base() {
 
-    printf "\n --- test_step_base -----------------------------------------------------------------------------------------: "
+    printf "\n --- TEST : test_step_base -----------------------------------------------------------------------------------------: \n"
 
     echo --- Stop -----------------------------------------------------------------------------------------:
     command_stop
@@ -119,7 +162,7 @@ test_step_base() {
 
 test_reset() {
 
-    printf "\n --- test_reset -----------------------------------------------------------------------------------------: "
+    printf "\n --- TEST : test_reset -----------------------------------------------------------------------------------------: \n"
 
     echo --- Stop -----------------------------------------------------------------------------------------:
     command_stop
@@ -135,7 +178,7 @@ test_reset() {
 
 test_to_ssl() {
 
-    printf "\n --- test_to_ssl -----------------------------------------------------------------------------------------: "
+    printf "\n --- TEST : test_to_ssl -----------------------------------------------------------------------------------------: \n"
 
     echo --- Stop -----------------------------------------------------------------------------------------:
     command_stop
@@ -162,7 +205,7 @@ test_to_ssl() {
 
 test_to_http() {
 
-    printf "\n --- test_to_http -----------------------------------------------------------------------------------------: "
+    printf "\n --- TEST : test_to_http -----------------------------------------------------------------------------------------: \n"
 
     echo --- Stop -----------------------------------------------------------------------------------------:
     command_stop
@@ -194,14 +237,15 @@ printf "\n --- Starts tests ----------------------------------------------------
 test_reset
 
 test_to_ssl
-test_to_http
+test_step_base
 
+test_to_http
 test_step_base
 
 
 ### Stops Foglamp #########################################################################################:
 
-printf "\n --- Tear down -----------------------------------------------------------------------------------------: "
+printf "\n --- Tear down -----------------------------------------------------------------------------------------: \n"
 
 command_stop
 command_kill
