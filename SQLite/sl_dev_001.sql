@@ -1,5 +1,7 @@
 ### Select #########################################################################################:
 
+SELECT * FROM readings ORDER BY id ;
+
 SELECT * FROM omf_created_objects;
 
 SELECT * FROM log;
@@ -34,7 +36,6 @@ SELECT * FROM  statistics_history WHERE key = 'FOGBENCH/TEMPERATURE' ORDER by ts
 # DELETE FROM foglamp.readings
 # DELETE FROM statistics_history;
 
-SELECT * FROM foglamp.readings ORDER BY id ;
 
 #
 # Update

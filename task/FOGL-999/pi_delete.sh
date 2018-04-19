@@ -18,9 +18,18 @@ echo DBG url_Elements :${url_elements}: > /dev/tty
 url_elements_list=`curl -s -u  ${PI_SERVER_UID}:${PI_SERVER_PWD} -X GET -k ${url_elements} |  jq --raw-output '.Items | .[] | .Links | .Elements'`
 echo DBG url_Elements_list :${url_elements_list}: > /dev/tty
 
+if [[ ${CONNECTOR_RELAY_VERSION} == "1.x" ]]; then
+
+    web_id=`curl -s -u  ${PI_SERVER_UID}:${PI_SERVER_PWD} -X GET -k ${url_elements_list} |  jq --raw-output '.Items | .[] | select(.Name=="'${OMF_PRODUCER_TOKEN}'") | .WebId '`
+    echo DBG web_id :${web_id}: > /dev/tty
+
+elif [[ ${CONNECTOR_RELAY_VERSION} == "2.x" ]]; then
+
+    web_id=`curl -s -u  ${PI_SERVER_UID}:${PI_SERVER_PWD} -X GET -k ${url_elements_list} |  jq --raw-output '.Items | .[] | select(.Name=="'${ASSET_CODE}'") | .WebId '`
+    echo DBG web_id :${web_id}: > /dev/tty
+
+fi
 #
-web_id=`curl -s -u  ${PI_SERVER_UID}:${PI_SERVER_PWD} -X GET -k ${url_elements_list} |  jq --raw-output '.Items | .[] | select(.Name=="'${OMF_PRODUCER_TOKEN}'") | .WebId '`
-echo DBG web_id :${web_id}: > /dev/tty
 
 #
 # Delete AF hierarchy

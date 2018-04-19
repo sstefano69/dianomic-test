@@ -1,4 +1,13 @@
 
+
+SELECT id, file_name FROM foglamp.backups WHERE (ts,id)
+
+SELECT  max(ts),MAX(id) FROM foglamp.backups WHERE status=2 or status=6;
+
+SELECT  * FROM foglamp.backups;
+
+SELECT * FROM foglamp.backups;
+
 ### OCS #########################################################################################:
 
 
