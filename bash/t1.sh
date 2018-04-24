@@ -1,6 +1,27 @@
 #!/bin/bash
 
 
+
+
+t6 () {
+
+    file=/tmp/out.txt
+    echo --- init > "${file}"
+
+    exec 3>&1  # Backup
+    exec 1>>"${file}"
+
+    echo Test 6
+    echo Test 7
+    echo Test 8
+    echo Test 9
+
+    exec 1>&3  #restore
+
+    cat "${file}"
+}
+
+###  #########################################################################################:
 t5 () {
 
 
@@ -110,8 +131,6 @@ EOF_1
 # Main
 #
 
-
-t5
-
+t6
 
 

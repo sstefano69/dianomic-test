@@ -1,6 +1,12 @@
 ### Select #########################################################################################:
 
+# DELETE FROM readings;
+
+SELECT count(*) FROM readings ORDER BY id ;
+
 SELECT * FROM readings ORDER BY id ;
+
+SELECT * FROM  streams;
 
 SELECT * FROM omf_created_objects;
 
@@ -15,7 +21,6 @@ SELECT * FROM scheduled_processes;
 
 SELECT * FROM readings ORDER BY id ;
 
-SELECT * FROM  streams;
 
 SELECT * FROM schedules WHERe process_name='purge';
 
