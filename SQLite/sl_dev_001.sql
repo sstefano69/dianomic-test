@@ -24,6 +24,10 @@ SELECT * FROM readings ORDER BY id ;
 
 SELECT * FROM schedules WHERe process_name='purge';
 
+SELECT * FROM log ORDER BY id ;
+
+SELECT * FROM log WHERE code="STRMN" ORDER BY id ;
+
 
 ### Purge #########################################################################################:
 
