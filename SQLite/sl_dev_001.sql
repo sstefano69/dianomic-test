@@ -1,5 +1,32 @@
 ### Select #########################################################################################:
 
+SELECT * FROM backups  ORDER BY id ;
+
+SELECT id, file_name FROM foglamp.backups WHERE id=
+(SELECT  MAX(id) FROM foglamp.backups WHERE status={0} or status={1});
+
+SELECT  MAX(id) FROM backups WHERE status=2 or status=2;
+
+SELECT id, file_name FROM backups WHERE (ts,id)=
+(SELECT  max(ts),MAX(id) FROM backups WHERE status=2 or status=2);
+
+       SELECT id, file_name FROM backups WHERE (ts,id)=
+            (SELECT  max(ts),MAX(id) FROM backups WHERE status=2 or status=6);
+
+  SELECT id, file_name FROM backups WHERE id=
+        (SELECT  MAX(id) FROM backups WHERE status=2 or status=6);
+
+
+ SELECT max(id), file_name FROM backups WHERE status=2 or status=6;
+
+
+SELECT id FROM backups WHERE status=2 or status=6 HAVING max(id);
+
+       SELECT id, file_name FROM backups WHERE id=
+            (SELECT  MAX(id) FROM backups WHERE status=2 or status=6);
+
+### Select #########################################################################################:
+
 # DELETE FROM readings;
 
 SELECT count(*) FROM readings ORDER BY id ;
@@ -37,7 +64,7 @@ SELECT * FROM foglamp.omf_created_objects;
 
 SELECT * FROM  statistics_history;
 
-SELECT * FROM  statistics_history WHERE key = 'SENT_2';
+SELECT id,key,history_ts,value,ts FROM  statistics_history WHERE key = 'SENT_2';
 
 SELECT * FROM  statistics_history WHERE key = 'FOGBENCH/TEMPERATURE' ORDER by ts DESC;
 

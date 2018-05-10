@@ -1,6 +1,13 @@
 #!/bin/bash
 
+t7 () {
 
+    export FOGLAMP_ROOT=/home/foglamp/Development/FogLAMP
+
+    storage=`${FOGLAMP_ROOT}/services/storage --plugin`
+
+    echo check :${storage}:
+}
 
 
 t6 () {
@@ -131,6 +138,6 @@ EOF_1
 # Main
 #
 
-t6
+t7
 
 
