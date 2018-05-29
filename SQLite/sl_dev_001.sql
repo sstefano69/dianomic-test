@@ -1,3 +1,26 @@
+
+select * from configuration;
+
+SELECT * FROM  statistics ;
+
+SELECT * FROM log WHERE code="STRMN" ORDER BY id DESC  ;
+
+
+
+SELECT * FROM  statistics WHERE key = 'SENT_4';
+
+
+SELECT count(*) FROM readings ORDER BY id ;
+
+SELECT * FROM readings ORDER BY id ;
+
+SELECT * FROM omf_created_objects;
+
+
+# DELETE FROM readings;
+
+# DELETE FROM omf_created_objects;
+
 ### Select #########################################################################################:
 
 SELECT * FROM backups  ORDER BY id ;
@@ -29,9 +52,26 @@ SELECT id FROM backups WHERE status=2 or status=6 HAVING max(id);
 
 # DELETE FROM readings;
 
+SELECT max(id) FROM readings;
+
+SELECT count(*) FROM readings WHERE id> 320000 ORDER BY id ;
+
+
 SELECT count(*) FROM readings ORDER BY id ;
 
-SELECT * FROM readings ORDER BY id ;
+
+SELECT * FROM readings WHERE id> 181200 ORDER BY id ;
+
+# 260001	c	da18e929-cd38-4c16-b389-fb9b4b345556	{"c":1}	2018-05-18	2018-05-18
+
+UPDATE streams SET last_object=5190 WHERE id=1;
+
+INSERT INTO  readings (id,asset_code,read_key,reading,user_ts,ts)
+values
+    ('260005','a','5','{"c":1}','2018-05-18','2018-05-18'),
+    ('260006','a','6','{"c":2}','2018-05-18','2018-05-18');
+
+
 
 SELECT * FROM  streams;
 
@@ -43,6 +83,7 @@ SELECT * FROM schedules WHERe process_name='71Modularity';
 
 SELECT * FROM schedules WHERe process_name='purge';
 
+SELECT * FROM schedules;
 
 SELECT * FROM scheduled_processes;
 
@@ -53,7 +94,6 @@ SELECT * FROM schedules WHERe process_name='purge';
 
 SELECT * FROM log ORDER BY id ;
 
-SELECT * FROM log WHERE code="STRMN" ORDER BY id ;
 
 
 ### Purge #########################################################################################:
@@ -61,6 +101,9 @@ SELECT * FROM log WHERE code="STRMN" ORDER BY id ;
 SELECT * FROM foglamp.scheduled_processes;
 
 SELECT * FROM foglamp.omf_created_objects;
+
+SELECT * FROM  statistics WHERE key = 'SENT_4';
+
 
 SELECT * FROM  statistics_history;
 

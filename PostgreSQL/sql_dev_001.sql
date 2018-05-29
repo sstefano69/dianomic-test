@@ -1,4 +1,23 @@
+DELETE FROM foglamp.omf_created_objects;
+
+UPDATE foglamp.streams SET last_object=0 WHERE id=1;
+
+# TRUNCATE TABLE foglamp.readings;
+
+
+SELECT * FROM foglamp.readings WHERE ID>= 723936 ORDER BY id ;
+
+SELECT * FROM foglamp.readings WHERE ID = 724191 ORDER BY id ;
+
+{'asset_code': 'c', 'user_ts': '2018-05-28 16:56:550000000+00', 'id': 724191, 'reading': {'c': 1}, 'read_key': '16e895df-9e7c-403c-bfff-2dcd0927cc12'}
+
+'2018-05-28T16:56:550000Z'
+
+###  #########################################################################################:
 SELECT * FROM scheduled_processes;
+
+SELECT * FROM foglamp.readings WHERE id=0 ORDER BY id ;
+
 
 SELECT * FROM foglamp.readings ORDER BY id ;
 
@@ -54,7 +73,7 @@ select DISTINCT code from foglamp.log;
 
 ###  #########################################################################################:
 
-select * from foglamp.schedules;
+select * from schedules;
 
 select * from foglamp.schedules WHERE id='2b614d26-760f-11e7-b5a5-be2e44b06b34';
 
