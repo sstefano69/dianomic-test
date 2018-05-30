@@ -1,0 +1,30 @@
+{
+  "default": "true", "description": "Test description", "type": "string",
+   "value":
+                {
+                    "typename": "position",
+                    "static": {
+                        "Name": {
+                            "type": "string",
+                            "isindex": true
+                        },
+                        "Location": {
+                            "type": "string"
+                        },
+                        "Company": {
+                            "type": "string"
+                        }
+                    },
+                    "dynamic": {
+                        "Time": {
+                            "type": "string",
+                            "format": "date-time",
+                            "isindex": true
+                        },
+                        "sensor": {
+                            "type": "number"
+                        }
+                    }
+                }
+
+}

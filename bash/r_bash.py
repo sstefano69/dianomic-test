@@ -11,8 +11,8 @@ script_path = "/home/foglamp/Development/FogLAMP/tests/system/suites"
 script_bash = "/home/foglamp/Development/FogLAMP/tests/system/tests/bash"
 
 # test_suite = "end_to_end_OCS"
-# test_suite = "end_to_end_PI"
-test_suite = "SOW"
+test_suite = "end_to_end_PI"
+# test_suite = "SOW"
 # ## Clean up #########################################################################################:
 
 # cmd = "rm -rf /usr/local/scaledb/tmp/scaledb-test-performance.log"
@@ -63,7 +63,7 @@ cmd = "cd {};".format(script_path)
 # cmd += "bash ./foglamp-test {0} --list".format(test_suite)
 # cmd += "bash ./foglamp-test {0}".format(test_suite)
 
-cmd += "bash ./foglamp-test {0}".format(test_suite)
+cmd += "bash  ./foglamp-test {0}  ".format(test_suite)
 
 # ### Exec  ######################################################################################################:
 

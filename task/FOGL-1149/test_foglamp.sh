@@ -4,8 +4,8 @@
 
 # Selects the environment
 # export TEST_ENV=develop
-export TEST_ENV=deploy
-# export TEST_ENV=ucore
+# export TEST_ENV=deploy
+export TEST_ENV=ucore
 
 if [[ "${TEST_ENV}" == "develop" ]]; then
 
@@ -287,11 +287,11 @@ printf "\n--- Starts tests -----------------------------------------------------
 
 test_reset
 
-test_to_ssl
-test_step_base
-
-test_to_http
-test_step_base
+#test_to_ssl
+#test_step_base
+#
+#test_to_http
+#test_step_base
 
 
 ### Stops Foglamp #########################################################################################:

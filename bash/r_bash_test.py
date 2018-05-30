@@ -16,11 +16,14 @@ os.system(cmd)
 
 # ## Prepare #########################################################################################:
 
+
 cmd = "cd {};".format(script_path)
 
-cmd += "bash /home/foglamp/wrk/task/FOGL-1149/test_foglamp.sh"
+# cmd += "bash /home/foglamp/wrk/task/FOGL-1149/test_foglamp.sh"
 
-# cmd += "bash ./t1.sh"
+cmd += "bash /home/foglamp/wrk/bash/t1.sh"
+
+
 #cmd += "bash /home/foglamp/Development/FogLAMP/tests/system/tests/bash/pi_delete.bash"
 # cmd += "bash /home/foglamp/wrk/task/FOGL-999/pi_delete.sh"
 

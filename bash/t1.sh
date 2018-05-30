@@ -1,62 +1,143 @@
 #!/bin/bash
 
-export FOGLAMP_ROOT=/home/foglamp/Development/FogLAMP
+t7 () {
 
+    export FOGLAMP_ROOT=/home/foglamp/Development/FogLAMP
+
+    storage=`${FOGLAMP_ROOT}/services/storage --plugin`
+
+    echo check :${storage}:
+}
+
+
+t6 () {
+
+    file=/tmp/out.txt
+    echo --- init > "${file}"
+
+    exec 3>&1  # Backup
+    exec 1>>"${file}"
+
+    echo Test 6
+    echo Test 7
+    echo Test 8
+    echo Test 9
+
+    exec 1>&3  #restore
+
+    cat "${file}"
+}
 
 ###  #########################################################################################:
+t5 () {
 
-test1 () {
-    ${FOGLAMP_ROOT}/scripts/foglamp status
-    ${FOGLAMP_ROOT}/scripts/foglamp stop
-    ${FOGLAMP_ROOT}/scripts/foglamp status
+
+second_to_wait=7
+waited_minutes=$((second_to_wait/60))
+
+echo DBG second_to_wait :${second_to_wait}:
+echo DBG waited_minutes :${waited_minutes}:
+
+second_to_wait=70
+waited_minutes=$((second_to_wait/60))
+
+
+echo DBG second_to_wait :${second_to_wait}:
+echo DBG waited_minutes :${waited_minutes}:
+
+
 }
 
-test2 () {
-    ${FOGLAMP_ROOT}/scripts/foglamp start
+t4 () {
+
+    echo TEST 2
+
+    ARCH_OS=`arch`
+
+    if [[ "${ARCH_OS}" == "armv7l" ]]; then
+
+        ARCH_DIR_NAME="armhf"
+        ARCH_FILE_NAME="armhf"
+
+    elif  [[ "${ARCH_OS}" == "x86_64" ]]; then
+
+        ARCH_DIR_NAME="x86_64"
+        ARCH_FILE_NAME="amd64"
+    fi
+
+    echo DBG ARCH_DIR_NAME :${ARCH_DIR_NAME}:
+}
+
+t3 () {
+
+    name=0320_DL_data_extraction.test
+
+    short="${name:0:4}"
+
+    echo DBG short :${short}:
+
+}
+
+}t1() {
+    var=`cat <<EOF
+    '
+
+      [1,2,3]
+    '
+EOF
+    `
+
+    tmp_file=${HOME}/p.txt
+
+    sudo classic << EOF_1 2>> /dev/null 1>> /dev/null
+    echo ${var}    | jq @csv          > ${tmp_file}
+EOF_1
+
+    echo ---  -----------------------------------------------------------------------------------------:
+    cat ${tmp_file}
+    echo ---  -----------------------------------------------------------------------------------------:
+    # cat ${tmp_file} | sudo classic jq "."
+    echo ---  -----------------------------------------------------------------------------------------:
+}
+
+t2() {
+
+    var=`cat <<EOF
+    '
+    [
+      {
+        "average": "20",
+        "min": "20",
+        "timestamp": "2018-03-12 15:21:14",
+        "max": "20"
+      },
+      {
+        "average": "10",
+        "min": "10",
+        "timestamp": "2018-03-12 15:21:10",
+        "max": "10"
+      }
+    ]
+    '
+EOF
+    `
+
+    tmp_file=${HOME}/p.txt
+
+    sudo classic << EOF_1 2>> /dev/null 1>> /dev/null
+    echo ${var}    | jq -C '[.[]|{average,min,max}|.timestamp="xxx"]'          > ${tmp_file}
+EOF_1
+
+    echo ---  -----------------------------------------------------------------------------------------:
+    cat ${tmp_file}
+    echo ---  -----------------------------------------------------------------------------------------:
 }
 
 
-test_ssl() {
+#
+# Main
+#
 
-    ${FOGLAMP_ROOT}/scripts/foglamp stop
-    ${FOGLAMP_ROOT}/scripts/foglamp kill
-    ${FOGLAMP_ROOT}/scripts/foglamp start
-
-    echo ">>> SET ssl -----------------------------------------------------------------"
-
-    curl -s -X GET http://localhost:8081/foglamp/category/rest_api/enableHttp | jq
-    curl -s -X PUT -H "Content-Type: application/json" -d '{"value": "false" }' http://localhost:8081/foglamp/category/rest_api/enableHttp
-    curl -s -X GET http://localhost:8081/foglamp/category/rest_api/enableHttp | jq
-
-    ${FOGLAMP_ROOT}/scripts/foglamp status
-    ${FOGLAMP_ROOT}/scripts/foglamp stop
-
-    echo ">>> FogLAMP restarted -----------------------------------------------------------------"
-    ${FOGLAMP_ROOT}/scripts/foglamp start
-}
-
-test_ssl
-
-###  #########################################################################################:
-
-exit 0
-
-export REST_API_URL=https://127.0.0.1:1995;\
-curl -s ${REST_API_URL}/foglamp/ping || true
-
-
-ls -l ${FOGLAMP_ROOT}/data/var/run
-
-cat ${FOGLAMP_ROOT}/data/var/run/foglamp.core.pid
-
-rm ${FOGLAMP_ROOT}/data/var/run/foglamp.core.pid
-
-clear screen;\
-ps -elf | grep  -E "storage" | grep -v "grep";\
-ps -elf | grep -E "foglamp.services" | grep -v "grep";\
-ps -elf | grep -E "foglamp.tasks" | grep -v "grep"
-
-ps -elf | grep  -E "python3" | grep -v "grep"
-
+t7
 
 

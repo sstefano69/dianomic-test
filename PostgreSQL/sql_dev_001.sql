@@ -1,10 +1,96 @@
+DELETE FROM foglamp.omf_created_objects;
+
+UPDATE foglamp.streams SET last_object=0 WHERE id=1;
+
+# TRUNCATE TABLE foglamp.readings;
+
+
+SELECT * FROM foglamp.readings WHERE ID>= 723936 ORDER BY id ;
+
+SELECT * FROM foglamp.readings WHERE ID = 724191 ORDER BY id ;
+
+{'asset_code': 'c', 'user_ts': '2018-05-28 16:56:550000000+00', 'id': 724191, 'reading': {'c': 1}, 'read_key': '16e895df-9e7c-403c-bfff-2dcd0927cc12'}
+
+'2018-05-28T16:56:550000Z'
+
+###  #########################################################################################:
+SELECT * FROM scheduled_processes;
+
+SELECT * FROM foglamp.readings WHERE id=0 ORDER BY id ;
+
+
+SELECT * FROM foglamp.readings ORDER BY id ;
+
+SELECT count(*) FROM foglamp.readings WHERE  user_ts < date('now', '-1 hours') AND id > 0;
+
+### Purge #########################################################################################:
+
+SELECT * FROM foglamp.scheduled_processes;
+
+SELECT * FROM foglamp.omf_created_objects;
+
+SELECT * FROM foglamp.readings ORDER BY id ;
+
+SELECT * FROM  foglamp.streams;
+
+SELECT * FROM  statistics_history;
+
+SELECT * FROM  statistics_history WHERE key = 'SENT_2';
+
+SELECT * FROM  statistics_history WHERE key = 'FOGBENCH/TEMPERATURE' ORDER by ts DESC;
+
+# DELETE FROM foglamp.omf_created_objects;
+# DELETE FROM foglamp.readings
+# DELETE FROM statistics_history;
+
+#
+# Update
+#
+UPDATE foglamp.streams SET last_object=0 WHERE id=1;
+
+### Purge #########################################################################################:
+
+select * from foglamp.tasks WHERE process_name='purge' ORDER by start_time desc;
+
+SELECT count(*) FROM foglamp.readings;
+
+select * from foglamp.configuration;
+
+select * from foglamp.log;
+
+select * from foglamp.log WHERE code='PURGE';
+
+SELECT * FROM foglamp.schedules WHERe process_name='purge';
+
+SELECT * FROM foglamp.readings ORDER BY id ;
+
+
+select * from foglamp.log;
+
+select * from statistics;
+
+select DISTINCT code from foglamp.log;
+
+###  #########################################################################################:
+
+select * from schedules;
+
+select * from foglamp.schedules WHERE id='2b614d26-760f-11e7-b5a5-be2e44b06b34';
+
+UPDATE foglamp.schedules  set schedule_day=0 WHERE id='2b614d26-760f-11e7-b5a5-be2e44b06b34';
+
+UPDATE foglamp.schedules  set schedule_day=NULL WHERE id='2b614d26-760f-11e7-b5a5-be2e44b06b34';
 
 ### DELETE  #########################################################################################:
 
+SELECT * FROM foglamp.readings;
+
 SELECT id,asset_code,reading,user_ts FROM foglamp.readings;
+
 SELECT * FROM foglamp.omf_created_objects;
 
 DELETE FROM foglamp.readings;
+
 DELETE FROM foglamp.omf_created_objects;
 
 select * from foglamp.log;
@@ -68,12 +154,14 @@ SELECT * FROM  statistics;
 
 ###  #########################################################################################:
 
+SELECT * FROM foglamp.configuration;
+
 SELECT * FROM foglamp.configuration WHERE key = 'BACK_REST';
 
 
 ###  #########################################################################################:
 
-SELECT * FROM foglamp.scheduled_processes;
+
 
 insert into foglamp.scheduled_processes (name, script) values ('statistics to pi','["python3", "-m", "foglamp.tasks.north.sending_process", "--stream_id", "2", "--debug_level", "1"]');
 
@@ -126,7 +214,6 @@ SELECT id,asset_code,reading,user_ts FROM foglamp.readings LIMIT 3;
 
 SELECT max(id)  FROM foglamp.readings;
 
-UPDATE foglamp.streams SET last_object=0 WHERE id=14002;
 
 
 
