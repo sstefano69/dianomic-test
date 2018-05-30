@@ -1,4 +1,16 @@
 
+SELECT count(*) FROM readings ORDER BY id ;
+
+SELECT * FROM readings ORDER BY id ;
+
+SELECT * FROM readings WHERE asset_code='fogbench_luxometer' ORDER BY id ;
+
+SELECT * FROM omf_created_objects;
+
+
+
+###  #########################################################################################:
+
 select * from configuration;
 
 SELECT * FROM  statistics ;
@@ -10,12 +22,18 @@ SELECT * FROM log WHERE code="STRMN" ORDER BY id DESC  ;
 SELECT * FROM  statistics WHERE key = 'SENT_4';
 
 
+pragma integrity_check;
+
+analyze;
+
 SELECT count(*) FROM readings ORDER BY id ;
 
 SELECT * FROM readings ORDER BY id ;
 
 SELECT * FROM omf_created_objects;
 
+
+SELECT * FROM readings WHERE asset_code='fogbench_pressure' ORDER BY id ;
 
 # DELETE FROM readings;
 
