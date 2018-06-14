@@ -13,6 +13,7 @@ script_bash = "/home/foglamp/Development/FogLAMP/tests/system/tests/bash"
 # test_suite = "end_to_end_OCS"
 test_suite = "end_to_end_PI"
 # test_suite = "SOW"
+
 # ## Clean up #########################################################################################:
 
 # cmd = "rm -rf /usr/local/scaledb/tmp/scaledb-test-performance.log"
@@ -21,22 +22,24 @@ test_suite = "end_to_end_PI"
 
 # ## Setup#########################################################################################:
 
-path = script_path + '/{0}/t'.format(test_suite)
-cmd = "chmod 755 {}/*.test".format(path)
-os.system(cmd)
-
-path = script_path + '/foglamp-test'
-cmd = "chmod 755 {}".format(path)
-os.system(cmd)
-
-path = script_bash + '/*.bash'
-cmd = "chmod 755 {}".format(path)
-os.system(cmd)
+# path = script_path + '/{0}/t'.format(test_suite)
+# cmd = "chmod 755 {}/*.test".format(path)
+# os.system(cmd)
+#
+# path = script_path + '/foglamp-test'
+# cmd = "chmod 755 {}".format(path)
+# os.system(cmd)
+#
+# path = script_bash + '/*.bash'
+# cmd = "chmod 755 {}".format(path)
+# os.system(cmd)
 
 
 # ## Fixes #########################################################################################:
 
-cmd = "cd {};".format(script_path)
+#cmd = "cd {};".format(script_path)
+
+cmd = ""
 
 # Fix
 #cmd += "pkill storage;"
@@ -56,14 +59,28 @@ cmd += "sudo sh -c '> /var/log/syslog';"
 
 os.system(cmd)
 
-# ## Prepare #########################################################################################:
+# ## Prepare C #########################################################################################:
 
-cmd = "cd {};".format(script_path)
+C_path = "/home/foglamp/Development/FogLAMP/tests/unit/C/plugins/common/build"
+
+# C_file = "/home/foglamp/Development/FogLAMP/C/tasks/north/sending_process/sending_process.cpp"
+
+cmd = "cd {path};".format(path=C_path)
+
+cmd += """
+cmake ..;\
+make;\
+./RunTests
+"""
+
+# ## Prepare Suite test #########################################################################################:
+
+#cmd = "cd {};".format(script_path)
 
 # cmd += "bash ./foglamp-test {0} --list".format(test_suite)
 # cmd += "bash ./foglamp-test {0}".format(test_suite)
 
-cmd += "bash  ./foglamp-test {0}  ".format(test_suite)
+#cmd += "bash  ./foglamp-test {0}  ".format(test_suite)
 
 # ### Exec  ######################################################################################################:
 

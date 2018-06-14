@@ -1,30 +1,37 @@
 
+SELECT * FROM configuration WHERE key = 'SEND_PR_1';
+
+SELECT * FROM  streams;
+
 SELECT count(*) FROM readings ORDER BY id ;
 
 SELECT * FROM readings ORDER BY id ;
+
+
+###  #########################################################################################:
 
 SELECT * FROM readings WHERE asset_code='fogbench_luxometer' ORDER BY id ;
 
 SELECT * FROM omf_created_objects;
 
 
+SELECT * FROM  statistics WHERE key = 'SENT_1';
+
+UPDATE statistics  SET VALUE=VALUE+10 WHERE key = 'SENT_1';
+
 
 ###  #########################################################################################:
 
 select * from configuration;
+
+# DELETE FROM configuration WHERE key='SEND_PR_1';
 
 SELECT * FROM  statistics ;
 
 SELECT * FROM log WHERE code="STRMN" ORDER BY id DESC  ;
 
 
-
 SELECT * FROM  statistics WHERE key = 'SENT_4';
-
-
-pragma integrity_check;
-
-analyze;
 
 SELECT count(*) FROM readings ORDER BY id ;
 
@@ -122,6 +129,7 @@ SELECT * FROM foglamp.omf_created_objects;
 
 SELECT * FROM  statistics WHERE key = 'SENT_4';
 
+SELECT * FROM  statistics;
 
 SELECT * FROM  statistics_history;
 
