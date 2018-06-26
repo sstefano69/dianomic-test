@@ -39,6 +39,8 @@ SELECT * FROM readings ORDER BY id ;
 
 SELECT * FROM omf_created_objects;
 
+SELECT * FROM readings WHERE asset_code='fogbench/luxometer' ORDER BY id ;
+
 
 SELECT * FROM readings WHERE asset_code='fogbench_pressure' ORDER BY id ;
 
