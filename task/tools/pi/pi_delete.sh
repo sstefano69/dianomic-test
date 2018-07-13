@@ -32,7 +32,7 @@ elif [[ ${CONNECTOR_RELAY_VERSION} == "2.x" ]]; then
 fi
 
 # Define the asset information
-export ASSET_CODE="fogbench_luxometer"
+export ASSET_CODE="fogbench/smoke_test"
 
 # Maximum numbers of retries to attempt an operation (usually corresponds to 600 seconds)
 export RETRY_COUNT=600

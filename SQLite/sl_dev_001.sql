@@ -1,11 +1,41 @@
+SELECT * FROM  streams;
+
+SELECT * FROM readings ORDER BY id ;
+
+SELECT * FROM omf_created_objects;
+
+
+###  #########################################################################################:
+
+SELECT * FROM scheduled_processes;
+
+SELECT * FROM configuration;
+
 
 SELECT * FROM configuration WHERE key = 'SEND_PR_1';
 
-SELECT * FROM  streams;
+
+INSERT INTO streams ( destination_id, description, last_object )
+       VALUES ( 1,  'OMF north', 0 );
+
+
+
+INSERT INTO streams ( destination_id, description, last_object )
+       VALUES ( 1, 'OMF north', 0 );
+
+INSERT INTO streams (id,  destination_id, description, last_object )
+       VALUES (max(id), 1, 'OMF north', 0 );
+
+SELECT max(id) FROM streams;
+
+INSERT INTO streams (id,  destination_id, description, last_object )
+       VALUES (id, 1, 'OMF north', 0 );
+
+
+SELECT * FROM  destinations;
 
 SELECT count(*) FROM readings ORDER BY id ;
 
-SELECT * FROM readings ORDER BY id ;
 
 
 ###  #########################################################################################:
@@ -37,7 +67,6 @@ SELECT count(*) FROM readings ORDER BY id ;
 
 SELECT * FROM readings ORDER BY id ;
 
-SELECT * FROM omf_created_objects;
 
 SELECT * FROM readings WHERE asset_code='fogbench/luxometer' ORDER BY id ;
 

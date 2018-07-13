@@ -1,5 +1,11 @@
 #!/bin/bash
 
+echo Script t1
+echo test 4
+bash t2.sh "$@"
+
+exit 0
+
 t7 () {
 
     export FOGLAMP_ROOT=/home/foglamp/Development/FogLAMP
