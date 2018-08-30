@@ -4,31 +4,34 @@
 
 import os
 
+###  #########################################################################################:
+
+
+
 # ### Cfg #########################################################################################:
 
 script_path = "/home/foglamp/Development/FogLAMP/tests/system/suites"
-
 script_bash = "/home/foglamp/Development/FogLAMP/tests/system/tests/bash"
 
-# test_suite = "end_to_end_OCS"
+test_suite = "end_to_end_OCS"
 #test_suite = "end_to_end_PI"
-test_suite = "smoke"
+#test_suite = "smoke"
 # test_suite = "SOW"
 
 # ## Clean up #########################################################################################:
+
 
 # cmd = "rm -rf /usr/local/scaledb/tmp/scaledb-test-performance.log"
 # os.system(cmd)
 
 
-# ## Setup#########################################################################################:
+### Setup#########################################################################################:
 
 path = script_path + '/{0}/t'.format(test_suite)
 cmd = "chmod 755 {}/*.test".format(path)
 os.system(cmd)
 
-path = script_path + '/{0}/tmp'.format(test_suite)
-cmd = "chmod 755 {}/*.sh".format(path)
+cmd = "chmod 755 {}/*.bash".format(script_bash)
 os.system(cmd)
 
 
@@ -40,6 +43,8 @@ os.system(cmd)
 # cmd = "chmod 755 {}".format(path)
 # os.system(cmd)
 
+cmd = "/home/foglamp/Development/FogLAMP/scripts/foglamp kill"
+os.system(cmd)
 
 # ## Fixes #########################################################################################:
 
@@ -84,7 +89,7 @@ os.system(cmd)
 cmd = "cd {};".format(script_path)
 
 # cmd += "bash ./foglamp-test {0} --list".format(test_suite)
-cmd += "bash ./foglamp-test {0}".format(test_suite)
+cmd += "bash ./foglamp-test {0} ".format(test_suite)
 
 # cmd += "bash ./smoke/tmp/test1.sh"
 

@@ -1,6 +1,23 @@
+
+
+SELECT * FROM destinations;
+
+SELECT * FROM  streams;
+
+SELECT * FROM  statistics;
+
+
+###  #########################################################################################:
 SELECT * FROM foglamp.backups;
 
+SELECT * FROM foglamp.destinations;
 
+SELECT * FROM  streams;
+
+SELECT * FROM readings ORDER BY id ;
+
+
+###  #########################################################################################:
 SELECT * FROM  foglamp.tasks WHERE process_name='North_Readings_to_PI';
 
 SELECT * FROM foglamp.scheduled_processes;
@@ -28,7 +45,6 @@ SELECT * FROM foglamp.configuration WHERE key = 'SEND_PR_1';
 SELECT * FROM foglamp.configuration WHERE key LIKE 'OMF%';
 
 
-SELECT * FROM  streams;
 
 INSERT INTO streams ( destination_id, description, last_object )
        VALUES ( 1,  'OMF north', 0 );

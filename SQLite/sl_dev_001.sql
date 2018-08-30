@@ -1,15 +1,51 @@
+
+SELECT * FROM version;
+
+
+###  FOGL-1641 #########################################################################################:
+
+SELECT * FROM scheduled_processes;
+
+SELECT * FROM schedules;
+
+SELECT * FROM configuration;
+
+
+
+SELECT * FROM destinations;
+
+SELECT * FROM  streams;
+
+###  #########################################################################################:
+
+INSERT INTO  readings (id,asset_code,read_key,reading,user_ts,ts)
+values
+    ('260005','fogbench_luxometer','5','{"tick":"tock"}','2018-05-18','2018-05-18');
+
+
+
+
+
+###  #########################################################################################:
 SELECT * FROM  streams;
 
 SELECT * FROM readings ORDER BY id ;
 
+SELECT * FROM readings WHERE asset_code like '%hum%' ORDER BY id ;
+
+SELECT * FROM readings WHERE asset_code='fogbench_luxometer' ORDER BY id ;
+
 SELECT * FROM omf_created_objects;
 
+SELECT * FROM  statistics;
 
-###  #########################################################################################:
 
-SELECT * FROM scheduled_processes;
+SELECT * FROM  statistics WHERE key = 'SENT_1';
 
-SELECT * FROM configuration;
+
+--###  #########################################################################################:
+
+
 
 
 SELECT * FROM configuration WHERE key = 'SEND_PR_1';
@@ -40,7 +76,6 @@ SELECT count(*) FROM readings ORDER BY id ;
 
 ###  #########################################################################################:
 
-SELECT * FROM readings WHERE asset_code='fogbench_luxometer' ORDER BY id ;
 
 SELECT * FROM omf_created_objects;
 
