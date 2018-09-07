@@ -1,4 +1,156 @@
 
+SELECT * FROM readings ORDER BY id ;
+
+
+SELECT * FROM  statistics;
+
+SELECT * FROM  statistics_history;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- -----------------------------------------------------------------------------------------:
+
+-- DELETE FROM main.readings;
+
+SELECT * FROM readings ORDER BY id ;
+
+-- Value to string
+INSERT INTO  readings  (asset_code,read_key,reading) values ('Test-001', 1, 1 );
+
+INSERT INTO  readings  (asset_code,read_key,reading) values ('Test-002', 2, '');
+
+-- Not possible
+INSERT INTO  readings  (asset_code,read_key,reading) values ('Test-003', 3, NULL);
+
+INSERT INTO  readings  (asset_code,read_key,reading) values ('Test-004', 4, '{"value":}');
+
+INSERT INTO  readings  (asset_code,read_key,reading) values ('Test-005', 5, '{"value":''}');
+
+INSERT INTO  readings  (asset_code,read_key,reading) values ('Test-005', 6, '{"value":None}');
+
+
+INSERT INTO  readings  (asset_code,read_key,reading) values ('Test-GOOD-001', 7, '{"value":1}');
+
+
+
+
+
+--  -----------------------------------------------------------------------------------------:
+
+
+SELECT * FROM  statistics;
+
+SELECT * FROM  statistics_history;
+
+
+--###  FOGL-1652 #########################################################################################:
+
+
+
+SELECT * FROM readings ORDER BY id ;
+
+
+SELECT * FROM configuration;
+
+
+--###  FOGL-1652 #########################################################################################:
+
+
+SELECT * FROM configuration;
+
+
+#
+# reading
+#
+INSERT INTO  readings (id,asset_code,read_key,reading,user_ts,ts)
+values
+    ('10','FOGL-1652-001','1','{"value":10}','2018-09-03','2018-09-03');
+
+INSERT INTO  readings (id,asset_code,read_key,reading,user_ts,ts)
+values
+    ('20','FOGL-1652-001','2','','2018-09-03','2018-09-03');
+
+INSERT INTO  readings (id,asset_code,read_key,reading,user_ts,ts)
+values
+    ('30','FOGL-1652-001','3','{"value"','2018-09-03','2018-09-03');
+
+# Good
+INSERT INTO  readings (id,asset_code,read_key,reading,user_ts,ts)
+values
+    ('40','FOGL-1652-002','4','{"value":02}','2018-09-03','2018-09-03');
+
+INSERT INTO  readings (id,asset_code,read_key,reading,user_ts,ts)
+values
+    ('50','FOGL-1652-001','5','{"value":"string"}','2018-09-03','2018-09-03');
+
+INSERT INTO  readings (id,asset_code,read_key,reading,user_ts,ts)
+values
+    ('51','FOGL-1652-010','51','{"value":"string1"}','2018-09-03','2018-09-03');
+
+INSERT INTO  readings (id,asset_code,read_key,reading,user_ts,ts)
+values
+    ('52','FOGL-1652-010','52','{"value":"stringÐÑÒ2"}','2018-09-03','2018-09-03');
+
+
+#
+# asset_code - errors
+#
+INSERT INTO  readings (id,asset_code,read_key,reading,user_ts,ts)
+values
+    ('60','','6','{"value":001}','2018-09-03','2018-09-03');
+
+INSERT INTO  readings (id,asset_code,read_key,reading,user_ts,ts)
+values
+    ('70','FOGL-1652 001','7','{"value":001}','2018-09-03','2018-09-03');
+
+INSERT INTO  readings (id,asset_code,read_key,reading,user_ts,ts)
+values
+    ('80',' FOGL-1652-001','8','{"value":001}','2018-09-03','2018-09-03');
+
+INSERT INTO  readings (id,asset_code,read_key,reading,user_ts,ts)
+values
+    ('90','FOGL-1652-001 ','9','{"value":001}','2018-09-03','2018-09-03');
+
+INSERT INTO  readings (id,asset_code,read_key,reading,user_ts,ts)
+values
+    ('100','FOGL-1652-ÐÑÒ-001 ','10','{"value":001}','2018-09-03','2018-09-03');
+
+# Good
+INSERT INTO  readings (id,asset_code,read_key,reading,user_ts,ts)
+values
+    ('110','FOGL-1652-003',11,'{"value":03}','2018-09-03','2018-09-03');
+
+
+
+
+###  #########################################################################################:
 SELECT * FROM version;
 
 
